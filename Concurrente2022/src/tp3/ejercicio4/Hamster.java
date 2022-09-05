@@ -1,43 +1,43 @@
 package tp3.ejercicio4;
 
+import java.util.Random;
+
 /**
  *
  * @author Mateo Valdesolo
  */
 public class Hamster implements Runnable {
 
-	private String nombre;
 	private Jaula jaula;
 
-	public Hamster(String nombre, Jaula jaula) {
-		this.nombre = nombre;
+	public Hamster(Jaula jaula) {
 		this.jaula = jaula;
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			System.out.println("Hamster " + nombre + " quiere usar la Hamaca");
-			jaula.usarHamaca();
-			System.out.println("Hamster " + nombre + " dejo de usar la Hamaca");
-			usar();
-			System.out.println("Hamster " + nombre + " quiere usar la Rueda");
-			jaula.usarRueda();
-			System.out.println("Hamster " + nombre + " dejo de usar la Rueda");
-			usar();
-			System.out.println("Hamster " + nombre + " quiere usar el Plato");
-			jaula.usarPlato();
-			usar();
-			System.out.println("Hamster " + nombre + " dejo de usar el Plato");
+			switch (opcRandom()) {
+			case 1:
+				jaula.usarHamaca();
+				break;
+			case 2:
+				jaula.usarRueda();
+				break;
+			case 3:
+				jaula.usarPlato();
+				break;
+			default:
+				break;
+			}
+
 		}
 
 	}
 
-	public void usar() {
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-		}
+	private int opcRandom() {
+		Random r = new Random();
+		return r.nextInt(3) + 1;
 	}
 
 }
