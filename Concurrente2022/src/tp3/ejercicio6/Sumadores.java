@@ -9,6 +9,13 @@ public class Sumadores implements Runnable {
 	private int[] arr;
 	private int inicioSuma, finSuma;
 	private Suma sumaCompartida;
+	
+	public Sumadores(int[] arr, int inicioSuma, int finSuma, Suma sumaCompartida) {
+		this.arr = arr;
+		this.inicioSuma = inicioSuma;
+		this.finSuma = finSuma;
+		this.sumaCompartida = sumaCompartida;
+	}
 
 	public void run() {
 		int sumaParcial = 0;
@@ -18,13 +25,6 @@ public class Sumadores implements Runnable {
 		}
 
 		sumaCompartida.sumar(sumaParcial);
-	}
-
-	public Sumadores(int[] arr, int inicioSuma, int finSuma, Suma sumaCompartida) {
-		this.arr = arr;
-		this.inicioSuma = inicioSuma;
-		this.finSuma = finSuma;
-		this.sumaCompartida = sumaCompartida;
 	}
 
 }
