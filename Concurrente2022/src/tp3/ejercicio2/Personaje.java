@@ -12,7 +12,7 @@ public class Personaje {
 		this.vida = 10;
 	}
 
-	public int getVida() {
+	public synchronized int getVida() {
 		return vida;
 	}
 
