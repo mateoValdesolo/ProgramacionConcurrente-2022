@@ -8,45 +8,45 @@ import java.util.Random;
  */
 public class Auto extends Vehiculo implements Runnable {
 
-	private int ltsCombustible;
-	private int ltsReserva;
-	private Surtidor surtidor;
+    private final int ltsCombustible;
+    private int ltsCombustibleActual;
+    private final int ltsReserva;
+    private Surtidor surtidor;
 
-	public Auto(String patente, String modelo, String marca, int km, Surtidor surtidor) {
-		super(patente, modelo, marca, km);
-		this.ltsCombustible = 60;
-		this.ltsReserva = 6;
-		this.surtidor = surtidor;
-	}
+    public Auto(String patente, String modelo, String marca, int km, Surtidor surtidor, int ltsCombustible, int ltsReserva) {
+        super(patente, modelo, marca, km);
+        this.ltsCombustible = ltsCombustible;
+        this.ltsCombustibleActual = ltsCombustible;
+        this.ltsReserva = ltsReserva;
+        this.surtidor = surtidor;
+    }
 
-	@Override
-	public void run() {
-		for (int i = 0; i < 100; i++) {
-			if (ltsCombustible <= ltsReserva) {
-				surtidor.cargarCombustible(60 - ltsCombustible);
-				this.ltsCombustible = 60;
-			} else {
-				andarKm(i);
-				System.out.println(
-						Thread.currentThread().getName() + " le faltan " + (ltsCombustible - 6) + " para la reserva");
-			}
+    @Override
+    public void run() {
+        while (ltsCombustibleActual > 0) {
+            if (ltsCombustibleActual <= ltsReserva) {
+                surtidor.cargarCombustible(60 - ltsCombustibleActual);
+                this.ltsCombustibleActual = ltsCombustible;
+            } else {
+                andarKm(ltsCombustibleActual - ltsReserva);
+                System.out.println(
+                        Thread.currentThread().getName() + " le faltan " + (ltsCombustibleActual - ltsReserva) + " para la reserva");
+            }
+        }
+    }
 
-		}
+    private void espera() {
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-	}
-
-	private void espera() {
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void andarKm(int i) {
-		Random r = new Random();
-		this.ltsCombustible -= i * (r.nextInt(10) + 1);
-		espera();
-	}
+    private void andarKm(int i) {
+        Random r = new Random();
+        this.ltsCombustibleActual -= (r.nextInt(i) + 1);
+        espera();
+    }
 
 }
