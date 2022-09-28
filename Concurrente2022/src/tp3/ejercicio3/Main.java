@@ -7,7 +7,7 @@ package tp3.ejercicio3;
 public class Main {
 
 	public static void main(String[] args) {
-		Sala sala = new Sala();
+		Sala sala = new Sala(5);
 		Encargado encargado = new Encargado(sala);
 		Thread[] clientes = new Thread[30];
 

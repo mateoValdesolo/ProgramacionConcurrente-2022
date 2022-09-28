@@ -12,9 +12,8 @@ public class Sala {
 	private Asiento[] asientos;
 	private int cantAsientos;
 
-	public Sala() {
-		Random r = new Random();
-		cantAsientos = 20;
+	public Sala(int cantAsientos) {
+		this.cantAsientos = cantAsientos;
 		asientos = new Asiento[cantAsientos];
 
 		for (int i = 0; i < asientos.length; i++) {
