@@ -16,7 +16,7 @@ public class Main {
 		hiloTaxista.start();
 		
 		for (int i = 0; i < clientes.length; i++) {
-			clientes[i].start();;
+			clientes[i].start();
 		}
 	}
 }
