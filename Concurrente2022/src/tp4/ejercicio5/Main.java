@@ -6,7 +6,7 @@ public class Main {
 		Taxi taxi = new Taxi();
 		Taxista taxista = new Taxista(taxi);
 		
-		Thread clientes[] = new Thread[10];
+		Thread clientes[] = new Thread[50];
 		Thread hiloTaxista = new Thread(taxista);
 
 		for (int i = 0; i < clientes.length; i++) {

@@ -12,7 +12,7 @@ public class ControlCruce implements Runnable {
 		while (true) {
 			try {
 				gestor.cambiarSemaforos();
-				Thread.sleep(4000);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
 		}

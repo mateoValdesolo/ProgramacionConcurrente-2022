@@ -2,7 +2,7 @@ package tp4.ejercicio7;
 
 public class Main {
     public static void main(String[] args) {
-        int cantCoches = 10;
+        int cantCoches = 50;
 
         GestorCruce gestor = new GestorCruce();
         ControlCruce contr = new ControlCruce(gestor);
