@@ -1,30 +1,46 @@
 package tp5.ejercicio2;
 
+import java.util.Scanner;
+
 public class Main {
+   
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+        Scanner s= new Scanner(System.in);
+        System.out.println("Ingrese la cantidad de perros");
+        int cantPerros= s.nextInt();
+        System.out.println("Ingrese la cantidad de gatos");
+        int cantGatos= s.nextInt();
 
-		Comedor comedor = new Comedor(5);
 
-		Thread hiloPerros[] = new Thread[20];
-		Thread hiloGatos[] = new Thread[20];
+        Thread animales[]= new Thread[cantPerros+cantGatos];
 
-		for (int i = 0; i < hiloPerros.length; i++) {
-			hiloPerros[i] = new Thread(new Perro(comedor), "Perro " + (i + 1));
-		}
+        int limite, cantPlatos;
 
-		for (int i = 0; i < hiloGatos.length; i++) {
-			hiloGatos[i] = new Thread(new Gato(comedor), "Gato " + (i + 1));
-		}
+        System.out.println("Ingrese el limite ");
+        limite= s.nextInt();
+        System.out.println("Ingrese la cantidad de platos");
+        cantPlatos= s.nextInt();
 
-		for (int i = 0; i < hiloPerros.length; i++) {
-			hiloPerros[i].start();
-		}
+        Comedor c= new Comedor(limite, cantPlatos);
 
-		for (int i = 0; i < hiloGatos.length; i++) {
-			hiloGatos[i].start();
-		}
+        int j=0;
 
-	}
+        for (int i=0;i<cantGatos+cantPerros;i++){
+            if (i<cantGatos){
+                animales[i]= new Thread(new Animal('G',c), "Gato "+i);
+            }
+            else{
 
+                animales[i]= new Thread(new Animal('P',c), "Perro "+j);
+                j++;
+            }
+        }
+        for (int i=0;i<cantGatos+cantPerros;i++){
+            animales[i].start();
+        }
+        
+
+
+    }
 }
