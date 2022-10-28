@@ -4,16 +4,27 @@ public class ControlTren implements Runnable {
 
 	private Tren tren;
 
-
 	public ControlTren(Tren tren) {
 		this.tren = tren;
 	}
 
 	@Override
 	public void run() {
-		// si la cantidad para viajar es, hago acquire de semBajar(cant pasajeros)
-		// al terminar
+		while (true) {
+			tren.viajar();
+			System.out.println("******** Tren comienza viaje ********");
+			viaje();
+			tren.finalizarViaje();
+			System.out.println("******** Tren finaliza viaje ********");
+		}
+	}
 
+	private void viaje() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

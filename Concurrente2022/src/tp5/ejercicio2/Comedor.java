@@ -8,6 +8,8 @@ public class Comedor {
 	private Semaphore semPerros;
 	private Semaphore mutex = new Semaphore(1);
 
+	private int cantGatosPorComer;
+	private int cantPerrosPorComer;
 	private int cantComieron; // Cantidad de veces que comieron
 	private int maxCant; // Cantidad maxima de animales que pueden haber al mismo tiempo
 
@@ -21,6 +23,7 @@ public class Comedor {
 
 	public void esperaComerGato() {
 		try {
+			cantGatosPorComer++;
 			semGatos.acquire();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -53,13 +56,14 @@ public class Comedor {
 	}
 
 	private void pasanGatos() {
-		semPerros.release(maxCant);
+		semGatos.release(maxCant);
 	}
 
 	// --------------- Perros ---------------
 
 	public void esperaComerPerro() {
 		try {
+			cantPerrosPorComer++;
 			semPerros.acquire();
 		} catch (InterruptedException e) {
 			e.printStackTrace();

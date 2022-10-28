@@ -1,7 +1,7 @@
 package tp5.ejercicio4;
 
 public class VendedorTickets implements Runnable {
-	
+
 	private Tren tren;
 
 	public VendedorTickets(Tren tren) {
@@ -10,9 +10,21 @@ public class VendedorTickets implements Runnable {
 
 	@Override
 	public void run() {
-		atender //acquire a su semComprar
-		vender // deja que se suba el pasajero, semSubir release
+		while (true) {
+			tren.venderTicket();
+			System.out.println("--------- " + Thread.currentThread().getName() + " Va a vender un Ticket ---------");
+			vender();
+			tren.entregarTicket();
+			System.out.println("--------- " + Thread.currentThread().getName() + " Entrego un Ticket ---------");
+		}
+	}
 
+	private void vender() {
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
