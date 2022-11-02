@@ -6,7 +6,7 @@ public class Main {
 
 		Sala sala = new Sala();
 
-		Thread[] personas = new Thread[150];
+		Thread[] personas = new Thread[20];
 		
 		Thread medidor = new Thread(new MedidorTemperatura(sala));
 
