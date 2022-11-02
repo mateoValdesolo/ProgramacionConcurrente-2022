@@ -1,17 +1,35 @@
 package tp5.ejercicio7;
 
-public class Main {
-	
+import java.util.Scanner;
+
+class Main {
 	public static void main(String[] args) {
-		Thread babuinos[] = new Thread[10];
-		Cuerda p = new Cuerda(5);
-		for (int i = 0; i < babuinos.length; i++) {
-			babuinos[i] = new Thread(new Babuino(p), "Babuino " + (i + 1));
+		Scanner s = new Scanner(System.in);
+		System.out.println("Ingrese la cantidad de babuinos del lado der");
+		int cantBabuinosD = s.nextInt();
+		System.out.println("Ingrese la cantidad de babuinos del lado izq");
+		int cantBabuinosI = s.nextInt();
+
+		Thread babuinos[] = new Thread[cantBabuinosD + cantBabuinosI];
+
+		int limite;
+
+		Cuerda c = new Cuerda();
+
+		int j = 0;
+
+		for (int i = 0; i < cantBabuinosI + cantBabuinosD; i++) {
+			if (i < cantBabuinosI) {
+				babuinos[i] = new Thread(new Babuino('I', c), "Babuino Izquierda " + i);
+			} else {
+
+				babuinos[i] = new Thread(new Babuino('D', c), "Babuino Derecho " + j);
+				j++;
+			}
 		}
-		for (int i = 0; i < babuinos.length; i++) {
+		for (int i = 0; i < cantBabuinosI + cantBabuinosD; i++) {
 			babuinos[i].start();
 		}
 
 	}
-
 }
